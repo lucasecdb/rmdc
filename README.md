@@ -9,6 +9,7 @@ yarn add @lucasecdb/rmdc
 ## Available components
 
 | Component | Implemented |
+| --- | --- |
 | Button | ✅ |
 | Card | ✅ |
 | Checkbox | ✅ |
