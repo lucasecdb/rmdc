@@ -1,5 +1,5 @@
 {
-  "name": "rmdc",
+  "name": "@lucasecdb/rmdc",
   "version": "0.1.0",
   "license": "MIT",
   "author": "Lucas Cordeiro",
@@ -23,18 +23,49 @@
       "pre-commit": "tsdx lint"
     }
   },
+  "dependencies": {
+    "@material/button": "^3.1.0",
+    "@material/card": "^3.1.0",
+    "@material/checkbox": "^3.1.0",
+    "@material/dialog": "^3.1.0",
+    "@material/dom": "^3.1.0",
+    "@material/fab": "^3.1.0",
+    "@material/floating-label": "^3.1.0",
+    "@material/form-field": "^3.1.0",
+    "@material/icon-button": "^3.1.0",
+    "@material/line-ripple": "^3.1.0",
+    "@material/notched-outline": "^3.1.0",
+    "@material/ripple": "^3.1.0",
+    "@material/snackbar": "^3.1.0",
+    "@material/tab": "^3.1.0",
+    "@material/tab-bar": "^3.1.0",
+    "@material/tab-indicator": "^3.1.0",
+    "@material/tab-scroller": "^3.1.0",
+    "@material/top-app-bar": "^3.1.0",
+    "@material/typography": "^3.1.0",
+    "classnames": "^2.2.6",
+    "uuid": "^3.3.3"
+  },
   "devDependencies": {
     "@lucasecdb/eslint-config": "^0.5.1",
+    "@types/classnames": "^2.2.9",
     "@types/jest": "^24.0.20",
     "@types/react": "^16.9.11",
     "@types/react-dom": "^16.9.3",
+    "@types/uuid": "^3.4.5",
     "eslint": "^6.6.0",
     "husky": "^3.0.9",
+    "node-sass": "^4.13.0",
     "prettier": "^1.18.2",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
+    "rollup-plugin-copy": "^3.1.0",
+    "rollup-plugin-scss": "^1.0.2",
     "tsdx": "^0.11.0",
     "tslib": "^1.10.0",
     "typescript": "^3.6.4"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
