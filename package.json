@@ -14,7 +14,7 @@
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
-    "test": "tsdx test --env=jsdom",
+    "test": "echo 'No tests yet!'",
     "lint": "tsdx lint"
   },
   "peerDependencies": {
