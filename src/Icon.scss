@@ -1,8 +1,0 @@
-@import '@material/ripple/common';
-@import '@material/ripple/mixins';
-
-.mdc-icon--rippled {
-  @include mdc-ripple-surface;
-  @include mdc-ripple-radius-bounded;
-  @include mdc-states;
-}

@@ -1,4 +1,22 @@
-@import "@material/theme/mixins";
+@import '@material/button/mdc-button.scss';
+@import '@material/card/mdc-card.scss';
+@import '@material/checkbox/mdc-checkbox.scss';
+@import '@material/dialog/mdc-dialog.scss';
+@import '@material/fab/mdc-fab.scss';
+@import '@material/floating-label/mdc-floating-label.scss';
+@import '@material/form-field/mdc-form-field.scss';
+@import '@material/icon-button/mdc-icon-button.scss';
+@import '@material/line-ripple/mdc-line-ripple.scss';
+@import '@material/notched-outline/mdc-notched-outline.scss';
+@import '@material/ripple/mdc-ripple.scss';
+@import '@material/snackbar/mdc-snackbar.scss';
+@import '@material/tab/mdc-tab.scss';
+@import '@material/tab-bar/mdc-tab-bar.scss';
+@import '@material/tab-indicator/mdc-tab-indicator.scss';
+@import '@material/tab-scroller/mdc-tab-scroller.scss';
+@import '@material/top-app-bar/mdc-top-app-bar.scss';
+@import '@material/typography/mdc-typography.scss';
+@import '@material/theme/mixins';
 
 @keyframes spinner-left-spin {
   from { transform: rotate(130deg); }
@@ -122,4 +140,13 @@
   border-color: inherit;
   /* durations: 4 * ARCTIME */
   animation: spinner-fill-unfill-rotate 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+}
+
+@import '@material/ripple/common';
+@import '@material/ripple/mixins';
+
+.mdc-icon--rippled {
+  @include mdc-ripple-surface;
+  @include mdc-ripple-radius-bounded;
+  @include mdc-states;
 }
