@@ -1,0 +1,7 @@
+{
+  "extends": "@lucasecdb",
+  "env": {
+    "browser": true,
+    "jest": true
+  }
+}
