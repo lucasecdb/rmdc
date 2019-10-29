@@ -7,7 +7,9 @@
   "module": "dist/rmdc.esm.js",
   "typings": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "rmdc.css",
+    "rmdc.scss"
   ],
   "scripts": {
     "start": "tsdx watch",
