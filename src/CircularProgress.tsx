@@ -1,8 +1,17 @@
+import classNames from 'classnames'
 import React from 'react'
 
-const CircularProgress: React.FC = () => {
+interface Props {
+  className?: string
+  size?: number
+}
+
+const CircularProgress: React.FC<Props> = ({ size, className }) => {
   return (
-    <div className="mdc-circular-progress">
+    <div
+      className={classNames(className, 'mdc-circular-progress')}
+      style={{ ['--size' as any]: `${size}px` }}
+    >
       <div className="mdc-circular-progress__container">
         <div className="mdc-circular-progress__layer">
           <div className="mdc-circular-progress__circle-clipper mdc-circular-progress__spinner-left">
