@@ -1,6 +1,6 @@
 {
   "name": "@lucasecdb/rmdc",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
   "author": "Lucas Cordeiro",
   "main": "dist/index.js",
