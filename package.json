@@ -24,7 +24,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "tsdx lint src"
+      "pre-push": "tsdx lint src"
     }
   },
   "dependencies": {
