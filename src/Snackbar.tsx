@@ -4,7 +4,7 @@ import classNames from 'classnames'
 
 import useClassList from './hooks/useClassList'
 
-export interface Props {
+export interface SnackbarProps {
   message: string
   className?: string
   timeoutMs?: number
@@ -21,7 +21,7 @@ export interface Props {
   onAnnounce?: () => void
 }
 
-export const Snackbar: React.FC<Props> = ({
+const Snackbar: React.FC<SnackbarProps> = ({
   message,
   actionText,
   timeoutMs,
@@ -133,3 +133,5 @@ export const Snackbar: React.FC<Props> = ({
     </div>
   )
 }
+
+export default Snackbar
