@@ -16,7 +16,7 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "echo 'No tests yet!'",
-    "lint": "tsdx lint",
+    "lint": "tsc --noEmit && eslint --ext ts,tsx .",
     "release": "np"
   },
   "peerDependencies": {
