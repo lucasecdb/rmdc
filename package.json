@@ -51,7 +51,7 @@
     "uuid": "^3.3.3"
   },
   "devDependencies": {
-    "@lucasecdb/eslint-config": "^0.5.1",
+    "@lucasecdb/eslint-config": "^0.6.0",
     "@types/classnames": "^2.2.9",
     "@types/jest": "^24.0.20",
     "@types/react": "^16.9.11",
@@ -61,13 +61,13 @@
     "husky": "^3.0.9",
     "node-sass": "^4.13.0",
     "np": "*",
-    "prettier": "^1.18.2",
+    "prettier": "^1.19.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "rollup-plugin-scss": "^1.0.2",
     "tsdx": "^0.11.0",
     "tslib": "^1.10.0",
-    "typescript": "^3.6.4"
+    "typescript": "^3.7.2"
   },
   "publishConfig": {
     "access": "public"
