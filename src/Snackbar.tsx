@@ -46,7 +46,7 @@ const Snackbar: React.FC<SnackbarProps> = ({
       removeClass,
       announce: () => {
         // Usually it works automatically if this component uses conditional rendering
-        onAnnounce && onAnnounce()
+        onAnnounce?.()
       },
       notifyOpening: () => {
         if (onOpening) {
@@ -74,35 +74,35 @@ const Snackbar: React.FC<SnackbarProps> = ({
     foundationRef.current.init()
 
     return () => {
-      foundationRef.current.destroy()
+      foundationRef.current?.destroy()
     }
   }, [addClass, onAnnounce, onClose, onClosing, onOpen, onOpening, removeClass])
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    foundationRef.current.handleKeyDown(e.nativeEvent)
+    foundationRef.current?.handleKeyDown(e.nativeEvent)
   }
 
   const handleActionClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    foundationRef.current.handleActionButtonClick(e.nativeEvent)
+    foundationRef.current?.handleActionButtonClick(e.nativeEvent)
   }
 
   useEffect(() => {
     if (timeoutMs) {
-      foundationRef.current.setTimeoutMs(timeoutMs)
+      foundationRef.current?.setTimeoutMs(timeoutMs)
     }
   }, [timeoutMs])
 
   useEffect(() => {
     if (closeOnEscape) {
-      foundationRef.current.setCloseOnEscape(closeOnEscape)
+      foundationRef.current?.setCloseOnEscape(closeOnEscape)
     }
   }, [closeOnEscape])
 
   useEffect(() => {
     if (open) {
-      foundationRef.current.open()
+      foundationRef.current?.open()
     } else {
-      foundationRef.current.close(reason ? reason : '')
+      foundationRef.current?.close(reason ? reason : '')
     }
   }, [open, reason])
 

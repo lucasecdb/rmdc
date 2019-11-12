@@ -21,8 +21,8 @@ const NotchedOutline: React.FC<NotchedOutlineProps> = ({
   children,
   ...otherProps
 }) => {
-  const foundationRef = useRef<MDCNotchedOutlineFoundation>(null)
-  const notchedEl = useRef<HTMLDivElement>()
+  const foundationRef = useRef<MDCNotchedOutlineFoundation | null>(null)
+  const notchedEl = useRef<HTMLDivElement>(null)
   const { classList, addClass, removeClass } = useClassList()
   const [foundationNotchWidth, setNotchWidth] = useState<number | undefined>(
     undefined
@@ -49,7 +49,7 @@ const NotchedOutline: React.FC<NotchedOutlineProps> = ({
     foundationRef.current = new MDCNotchedOutlineFoundation(adapter)
     foundationRef.current.init()
 
-    return () => foundationRef.current.destroy()
+    return () => foundationRef.current?.destroy()
   }, [addClass, removeClass])
 
   useEffect(() => {

@@ -45,7 +45,7 @@ const TabIndicator: React.RefForwardingComponent<
 
   const tabIndicatorElement = useRef<HTMLSpanElement>(null)
   const foundationRef = useRef<
-    MDCFadingTabIndicatorFoundation | MDCSlidingTabIndicatorFoundation
+    MDCFadingTabIndicatorFoundation | MDCSlidingTabIndicatorFoundation | null
   >(null)
 
   const getNativeContentElement = () => {
@@ -62,7 +62,7 @@ const TabIndicator: React.RefForwardingComponent<
 
   const computeContentClientRect = useCallback(() => {
     const contentElement = getNativeContentElement()
-    if (!(contentElement && contentElement.getBoundingClientRect)) {
+    if (!contentElement?.getBoundingClientRect) {
       // new DOMRect is not IE11 compatible
       const defaultDOMRect = {
         bottom: 0,
@@ -128,14 +128,14 @@ const TabIndicator: React.RefForwardingComponent<
     }
     foundationRef.current.init()
 
-    return () => foundationRef.current.destroy()
+    return () => foundationRef.current?.destroy()
   }, [computeContentClientRect, fade, forceUpdate])
 
   useEffect(() => {
     if (active) {
-      foundationRef.current.activate(previousIndicatorClientRect)
+      foundationRef.current?.activate(previousIndicatorClientRect)
     } else {
-      foundationRef.current.deactivate()
+      foundationRef.current?.deactivate()
     }
   }, [active, previousIndicatorClientRect])
 

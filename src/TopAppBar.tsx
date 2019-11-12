@@ -36,9 +36,7 @@ export interface TopAppbarFixedAdjustProps {
   short?: boolean
 }
 
-export const TopAppBarFixedAdjust: React.FunctionComponent<
-  TopAppbarFixedAdjustProps
-> = ({
+export const TopAppBarFixedAdjust: React.FunctionComponent<TopAppbarFixedAdjustProps> = ({
   tag: Tag = 'main',
   children,
   className = '',
@@ -189,8 +187,13 @@ const TopAppBar: React.FC<TopAppBarProps> = ({
 }) => {
   const { classList, addClass, removeClass } = useClassList()
   const [activeStyles, setStyles] = useState<React.CSSProperties>({})
-  const foundationRef = useRef(null)
-  const headerRef = useRef(null)
+  const foundationRef = useRef<
+    | MDCTopAppBarFoundation
+    | MDCShortTopAppBarFoundation
+    | MDCFixedTopAppBarFoundation
+    | null
+  >(null)
+  const headerRef = useRef<HTMLElement>(null)
 
   const classListRef = useRef(classList)
 
@@ -220,10 +223,7 @@ const TopAppBar: React.FC<TopAppBarProps> = ({
         })
       },
       getTopAppBarHeight: () => {
-        if (headerRef && headerRef.current) {
-          return headerRef.current.clientHeight
-        }
-        return 0
+        return headerRef.current?.clientHeight ?? 0
       },
       getViewportScrollY: () => {
         return scrollTarget && scrollTarget.current
@@ -231,13 +231,10 @@ const TopAppBar: React.FC<TopAppBarProps> = ({
           : window.pageYOffset
       },
       getTotalActionItems: () => {
-        if (headerRef && headerRef.current) {
-          const actionItems = headerRef.current.querySelectorAll(
-            `.${CSS_CLASSES.ACTION_ITEM}`
-          )
-          return actionItems.length
-        }
-        return 0
+        return (
+          headerRef.current?.querySelectorAll(`.${CSS_CLASSES.ACTION_ITEM}`)
+            .length ?? 0
+        )
       },
       notifyNavigationIconClicked: () => {
         if (onNavIconClickedRef.current) {
@@ -257,15 +254,14 @@ const TopAppBar: React.FC<TopAppBarProps> = ({
     foundationRef.current.init()
 
     return () => {
-      foundationRef.current.destroy()
+      foundationRef.current?.destroy()
     }
   }, [addClass, fixed, removeClass, scrollTarget, short, shortCollapsed])
 
   useEffect(() => {
-    const handler = () => foundationRef.current.handleTargetScroll()
+    const handler = () => foundationRef.current?.handleTargetScroll()
 
-    const eventTarget =
-      scrollTarget && scrollTarget.current ? scrollTarget.current : window
+    const eventTarget = scrollTarget?.current ?? window
 
     eventTarget.addEventListener('scroll', handler)
 
@@ -275,7 +271,7 @@ const TopAppBar: React.FC<TopAppBarProps> = ({
   }, [scrollTarget])
 
   useEffect(() => {
-    const handler = () => foundationRef.current.handleWindowResize()
+    const handler = () => foundationRef.current?.handleWindowResize()
 
     window.addEventListener('resize', handler)
 

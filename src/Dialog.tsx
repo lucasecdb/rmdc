@@ -46,7 +46,7 @@ export const DialogActions: React.FC<React.HTMLAttributes<HTMLElement>> = ({
   return (
     <footer className={classes} {...props}>
       {React.Children.map(children, element => {
-        if (typeof element !== 'object' || !('props' in element)) {
+        if (!element || typeof element !== 'object' || !('props' in element)) {
           return element
         }
 
@@ -55,10 +55,7 @@ export const DialogActions: React.FC<React.HTMLAttributes<HTMLElement>> = ({
         }
 
         return React.cloneElement(element, {
-          className: classNames(
-            element.props && element.props.className,
-            'mdc-dialog__button'
-          ),
+          className: classNames(element.props?.className, 'mdc-dialog__button'),
         })
       })}
     </footer>
@@ -146,13 +143,13 @@ const Dialog: React.FC<DialogProps> = ({
   autoStackButtons,
 }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
-  const focusTrapRef = useRef<FocusTrap>(null)
+  const focusTrapRef = useRef<FocusTrap | null>(null)
 
   const dialogRef = useRef<HTMLDivElement>(null)
   const scrimRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    focusTrapRef.current = util.createFocusTrapInstance(dialogRef.current)
+    focusTrapRef.current = util.createFocusTrapInstance(dialogRef.current!)
   }, [])
 
   useEffect(() => {
@@ -167,14 +164,14 @@ const Dialog: React.FC<DialogProps> = ({
 
         timeoutId = setTimeout(() => {
           dispatch({ type: 'opening_end' })
-          focusTrapRef.current.activate()
+          focusTrapRef.current?.activate()
         }, numbers.DIALOG_ANIMATION_OPEN_TIME_MS)
       })
     } else {
       dispatch({ type: 'closing_start' })
 
       timeoutId = setTimeout(() => {
-        focusTrapRef.current.deactivate()
+        focusTrapRef.current?.deactivate()
         dispatch({ type: 'closing_end' })
       }, numbers.DIALOG_ANIMATION_CLOSE_TIME_MS)
     }

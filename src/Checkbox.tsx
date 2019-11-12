@@ -45,7 +45,7 @@ const Checkbox: React.RefForwardingComponent<CheckboxRef, CheckboxProps> = (
   const containerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const { classList, addClass, removeClass } = useClassList()
-  const foundationRef = useRef<MDCCheckboxFoundation>(null)
+  const foundationRef = useRef<MDCCheckboxFoundation | null>(null)
   const [inputProps, setInputProps] = useState<
     React.InputHTMLAttributes<HTMLInputElement>
   >({})
@@ -58,11 +58,18 @@ const Checkbox: React.RefForwardingComponent<CheckboxRef, CheckboxProps> = (
   })
 
   useImperativeHandle(ref, () => ({
-    ripple: rippleFoundation,
+    ripple: rippleFoundation!,
   }))
 
   useEffect(() => {
-    inputRef.current.indeterminate = indeterminate
+    // We need the if here because we can't assign
+    // if we have a null coalescing on the expression
+    // being assigned to.
+    if (!inputRef.current) {
+      return
+    }
+
+    inputRef.current.indeterminate = indeterminate ?? false
   }, [indeterminate])
 
   const checkedRef = useRef(checked)
@@ -84,8 +91,8 @@ const Checkbox: React.RefForwardingComponent<CheckboxRef, CheckboxProps> = (
       forceLayout: () => null,
       hasNativeControl: () => true,
       isAttachedToDOM: () => true,
-      isChecked: () => checkedRef.current,
-      isIndeterminate: () => indeterminateRef.current,
+      isChecked: () => checkedRef.current ?? false,
+      isIndeterminate: () => indeterminateRef.current ?? false,
       setNativeControlAttr: (attr, value) => {
         setInputProps(prevProps => {
           return {
@@ -124,20 +131,20 @@ const Checkbox: React.RefForwardingComponent<CheckboxRef, CheckboxProps> = (
     foundationRef.current.init()
 
     return () => {
-      foundationRef.current.destroy()
+      foundationRef.current?.destroy()
     }
   }, [addClass, removeClass])
 
   useEffect(() => {
-    foundationRef.current.setDisabled(disabled)
+    foundationRef.current?.setDisabled(disabled ?? false)
   }, [disabled])
 
   useEffect(() => {
-    foundationRef.current.handleChange()
+    foundationRef.current?.handleChange()
   }, [checked, indeterminate])
 
   const handleAnimationEnd = () => {
-    foundationRef.current.handleAnimationEnd()
+    foundationRef.current?.handleAnimationEnd()
   }
 
   const classes = classNames(

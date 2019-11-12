@@ -20,7 +20,7 @@ const LineRipple: React.FC<LineRippleProps> = ({
 }) => {
   const { classList, addClass, removeClass } = useClassList()
   const [activeStyles, setStyles] = useState<React.CSSProperties>({})
-  const foundationRef = useRef<MDCLineRippleFoundation>(null)
+  const foundationRef = useRef<MDCLineRippleFoundation | null>(null)
 
   const classListRef = useRef(classList)
 
@@ -48,25 +48,25 @@ const LineRipple: React.FC<LineRippleProps> = ({
     foundationRef.current = new MDCLineRippleFoundation(adapter)
     foundationRef.current.init()
 
-    return () => foundationRef.current.destroy()
+    return () => foundationRef.current?.destroy()
   }, [addClass, removeClass])
 
   useEffect(() => {
     if (active) {
-      foundationRef.current.activate()
+      foundationRef.current?.activate()
     } else {
-      foundationRef.current.deactivate()
+      foundationRef.current?.deactivate()
     }
   }, [foundationRef, active])
 
   useEffect(() => {
     if (rippleCenter) {
-      foundationRef.current.setRippleCenter(rippleCenter)
+      foundationRef.current?.setRippleCenter(rippleCenter)
     }
   }, [rippleCenter])
 
   const handleTransitionEnd = (evt: React.TransitionEvent<Element>) => {
-    foundationRef.current.handleTransitionEnd(evt.nativeEvent)
+    foundationRef.current?.handleTransitionEnd(evt.nativeEvent)
   }
 
   const classes = classNames(

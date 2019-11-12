@@ -34,13 +34,13 @@ const Tab: React.FC<TabProps> = ({
   const id = useId()
   const [indicatorActive, setIndicatorActive] = useState(false)
   const { classList, addClass, removeClass } = useClassList()
-  const foundationRef = useRef<MDCTabFoundation>(null)
+  const foundationRef = useRef<MDCTabFoundation | null>(null)
   const tabRef = useRef<HTMLButtonElement>(null)
   const tabContentRef = useRef<HTMLSpanElement>(null)
   const { register, onTabChange } = useTabBar()
-  const tabIndicatorRef = useRef(null)
+  const tabIndicatorRef = useRef<any | null>(null)
   const tabRippleRef = useRef<HTMLDivElement>(null)
-  const previousIndicatorClientRectRef = useRef<ClientRect>(null)
+  const previousIndicatorClientRectRef = useRef<ClientRect | null>(null)
 
   const [attributes, setAttributes] = useState<any>({
     'aria-selected': 'false',
@@ -48,26 +48,25 @@ const Tab: React.FC<TabProps> = ({
   })
 
   const computeIndicatorClientRect = useCallback(() => {
-    if (!tabIndicatorRef.current) {
-      return {} as ClientRect
-    }
-    return tabIndicatorRef.current.computeContentClientRect()
+    return (
+      tabIndicatorRef.current?.computeContentClientRect() ?? ({} as ClientRect)
+    )
   }, [])
 
   const computeDimensions = useCallback(() => {
-    return foundationRef.current.computeDimensions()
+    return foundationRef.current?.computeDimensions()
   }, [])
 
   const focus = useCallback(() => {
-    tabRef.current && tabRef.current.focus()
+    tabRef.current?.focus()
   }, [])
 
   useEffect(() => {
     const unregister = register(id, {
       activate: (clientRect?: ClientRect) => {
-        foundationRef.current.activate(clientRect)
+        foundationRef.current?.activate(clientRect)
       },
-      deactivate: () => foundationRef.current.deactivate(),
+      deactivate: () => foundationRef.current?.deactivate(),
       computeIndicatorClientRect,
       computeDimensions,
       focus,
@@ -96,17 +95,15 @@ const Tab: React.FC<TabProps> = ({
           [attr]: value,
         }))
       },
-      getOffsetLeft: () => Number(tabRef.current && tabRef.current.offsetLeft),
-      getOffsetWidth: () =>
-        Number(tabRef.current && tabRef.current.offsetWidth),
-      getContentOffsetLeft: () =>
-        tabContentRef.current ? tabContentRef.current.offsetLeft : 0,
-      getContentOffsetWidth: () =>
-        tabContentRef.current ? tabContentRef.current.offsetWidth : 0,
-      focus: () => tabRef.current && tabRef.current.focus(),
+      getOffsetLeft: () => Number(tabRef.current?.offsetLeft),
+      getOffsetWidth: () => Number(tabRef.current?.offsetWidth),
+      getContentOffsetLeft: () => tabContentRef.current?.offsetLeft ?? 0,
+      getContentOffsetWidth: () => tabContentRef.current?.offsetWidth ?? 0,
+      focus: () => tabRef.current?.focus(),
       notifyInteracted: onInteraction,
       activateIndicator: clientRect => {
-        previousIndicatorClientRectRef.current = clientRect
+        previousIndicatorClientRectRef.current =
+          clientRect ?? ({} as ClientRect)
         setIndicatorActive(true)
       },
       deactivateIndicator: () => {
@@ -117,20 +114,20 @@ const Tab: React.FC<TabProps> = ({
     foundationRef.current.init()
 
     return () => {
-      foundationRef.current.destroy()
+      foundationRef.current?.destroy()
     }
   }, [addClass, className, onInteraction, removeClass])
 
   useEffect(() => {
-    foundationRef.current.setFocusOnActivate(focusOnActivate)
+    foundationRef.current?.setFocusOnActivate(focusOnActivate)
   }, [focusOnActivate])
 
   const handleFocus = () => {
-    tabRippleRef.current && tabRippleRef.current.focus()
+    tabRippleRef.current?.focus()
   }
 
   const handleBlur = () => {
-    tabRippleRef.current && tabRippleRef.current.blur()
+    tabRippleRef.current?.blur()
   }
 
   const handleClick = () => {
@@ -147,7 +144,9 @@ const Tab: React.FC<TabProps> = ({
       icon={!!indicatorContent}
       fade={isFadingIndicator}
       active={indicatorActive}
-      previousIndicatorClientRect={previousIndicatorClientRectRef.current}
+      previousIndicatorClientRect={
+        previousIndicatorClientRectRef.current ?? undefined
+      }
       ref={tabIndicatorRef}
     >
       {indicatorContent}

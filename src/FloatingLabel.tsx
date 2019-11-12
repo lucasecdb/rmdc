@@ -22,8 +22,8 @@ const FloatingLabel: React.RefForwardingComponent<
   { className, children, onWidthChange, float = false, ...otherProps },
   ref
 ) => {
-  const foundationRef = useRef<MDCFloatingLabelFoundation>(null)
-  const labelElement = useRef<HTMLLabelElement>()
+  const foundationRef = useRef<MDCFloatingLabelFoundation | null>(null)
+  const labelElement = useRef<HTMLLabelElement>(null)
   const { classList, addClass, removeClass } = useClassList()
 
   useEffect(() => {
@@ -44,11 +44,11 @@ const FloatingLabel: React.RefForwardingComponent<
     foundationRef.current = new MDCFloatingLabelFoundation(adapter)
     foundationRef.current.init()
 
-    return () => foundationRef.current.destroy()
+    return () => foundationRef.current?.destroy()
   }, [addClass, removeClass])
 
   useEffect(() => {
-    foundationRef.current.float(float)
+    foundationRef.current?.float(float)
   }, [float])
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const FloatingLabel: React.RefForwardingComponent<
   }, [children, onWidthChange])
 
   useImperativeHandle(ref, () => ({
-    shake: () => foundationRef.current.shake(true),
+    shake: () => foundationRef.current?.shake(true),
   }))
 
   const onShakeEnd = () => {

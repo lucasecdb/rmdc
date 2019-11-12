@@ -15,7 +15,7 @@ import useClassList from './hooks/useClassList'
 const useEventListener = (
   eventName: string,
   handler: EventListener,
-  element: EventTarget = window
+  element: EventTarget | null = window
 ) => {
   // Create a ref that stores handler
   const handlerRef = useRef<EventListener>(() => {})
@@ -58,7 +58,7 @@ export function useRipple<T extends HTMLElement, U extends HTMLElement = T>({
 }) {
   const [style, setStyle] = useState<React.CSSProperties>({})
   const { classList, addClass, removeClass } = useClassList()
-  const foundationRef = useRef<MDCRippleFoundation>(null)
+  const foundationRef = useRef<MDCRippleFoundation | null>(null)
 
   const disabledRef = useRef(disabled)
   const unboundedRef = useRef(unbounded)
@@ -74,7 +74,7 @@ export function useRipple<T extends HTMLElement, U extends HTMLElement = T>({
   useEffect(() => {
     let isCurrent = true
     const surface = surfaceRef.current
-    const activator = activatorRef && activatorRef.current
+    const activator = activatorRef?.current
 
     const adapter: MDCRippleAdapter = {
       browserSupportsCssVars: () => util.supportsCssVariables(window),
@@ -84,7 +84,7 @@ export function useRipple<T extends HTMLElement, U extends HTMLElement = T>({
           return ponyfill.matches(activator, ':active')
         }
 
-        return ponyfill.matches(surface, ':active')
+        return ponyfill.matches(surface!, ':active')
       },
       isSurfaceDisabled: () => disabledRef.current,
       addClass: className => {
@@ -138,7 +138,7 @@ export function useRipple<T extends HTMLElement, U extends HTMLElement = T>({
         })
       },
       computeBoundingRect: () => {
-        if (!isCurrent) {
+        if (!isCurrent || !surface) {
           // need to return object since foundation expects it
           // new DOMRect is not IE11 compatible
           const defaultDOMRect = {
@@ -177,35 +177,35 @@ export function useRipple<T extends HTMLElement, U extends HTMLElement = T>({
 
     return () => {
       isCurrent = false
-      foundationRef.current.destroy()
+      foundationRef.current?.destroy?.()
     }
   }, [computeBoundingRect, surfaceRef, activatorRef, addClass, removeClass])
 
   useEffect(() => {
     if (disabled) {
-      foundationRef.current.handleBlur()
+      foundationRef.current?.handleBlur?.()
     }
   }, [foundationRef, disabled])
 
   const activateRipple = useCallback(
     (evt: Event) => {
-      foundationRef.current.activate(evt)
+      foundationRef.current?.activate?.(evt)
     },
     [foundationRef]
   )
 
   const deactivateRipple = useCallback(() => {
-    foundationRef.current.deactivate()
+    foundationRef.current?.deactivate?.()
   }, [foundationRef])
 
   const eventTargetRef = activatorRef || surfaceRef
 
   const handleFocus = useCallback(() => {
-    foundationRef.current.handleFocus()
+    foundationRef.current?.handleFocus()
   }, [foundationRef])
 
   const handleBlur = useCallback(() => {
-    foundationRef.current.handleBlur()
+    foundationRef.current?.handleBlur()
   }, [foundationRef])
 
   useEventListener('focus', handleFocus, eventTargetRef.current)
@@ -260,8 +260,8 @@ export const RippleComponent: React.RefForwardingComponent<
   useImperativeHandle(
     ref,
     () => ({
-      focus: () => foundation && foundation.handleFocus(),
-      blur: () => foundation && foundation.handleBlur(),
+      focus: () => foundation?.handleFocus(),
+      blur: () => foundation?.handleBlur(),
     }),
     [foundation]
   )

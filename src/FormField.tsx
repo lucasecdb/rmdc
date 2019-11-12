@@ -30,21 +30,21 @@ const FormField: React.FC<Props> = ({
   const inputRef = useRef<InputRef>(null)
 
   const labelRef = useRef<HTMLLabelElement>(null)
-  const foundationRef = useRef<MDCFormFieldFoundation>(null)
+  const foundationRef = useRef<MDCFormFieldFoundation | null>(null)
 
   useEffect(() => {
     const adapter: MDCFormFieldAdapter = {
       activateInputRipple: () => {
-        inputRef.current.ripple.activate()
+        inputRef.current?.ripple.activate()
       },
       deactivateInputRipple: () => {
-        inputRef.current.ripple.deactivate()
+        inputRef.current?.ripple.deactivate()
       },
       registerInteractionHandler: (type, handler) => {
-        labelRef.current.addEventListener(type, handler)
+        labelRef.current?.addEventListener(type, handler)
       },
       deregisterInteractionHandler: (type, handler) => {
-        labelRef.current.removeEventListener(type, handler)
+        labelRef.current?.removeEventListener(type, handler)
       },
     }
 
@@ -52,7 +52,7 @@ const FormField: React.FC<Props> = ({
     foundationRef.current.init()
 
     return () => {
-      foundationRef.current.destroy()
+      foundationRef.current?.destroy()
     }
   }, [])
 

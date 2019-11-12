@@ -58,7 +58,7 @@ const TabScroller: React.RefForwardingComponent<
   } = useClassList()
   const areaElement = useRef<HTMLDivElement>(null)
   const contentElement = useRef<HTMLDivElement>(null)
-  const foundationRef = useRef<MDCTabScrollerFoundation>(null)
+  const foundationRef = useRef<MDCTabScrollerFoundation | null>(null)
   const [areaStyle, setAreaStyle] = useState<React.CSSProperties>({})
   const [contentStyle, setContentStyle] = useState<React.CSSProperties>({})
 
@@ -67,15 +67,15 @@ const TabScroller: React.RefForwardingComponent<
   }, [])
 
   const getScrollPosition = useCallback(() => {
-    return foundationRef.current.getScrollPosition()
+    return foundationRef.current?.getScrollPosition() ?? 0
   }, [])
 
   const incrementScroll = useCallback((scrollXIncrement: number) => {
-    foundationRef.current.incrementScroll(scrollXIncrement)
+    foundationRef.current?.incrementScroll(scrollXIncrement)
   }, [])
 
   const scrollTo = useCallback((scrollX: number) => {
-    foundationRef.current.scrollTo(scrollX)
+    foundationRef.current?.scrollTo(scrollX)
   }, [])
 
   useImperativeHandle<TabScrollerRef, TabScrollerRef>(
@@ -160,7 +160,7 @@ const TabScroller: React.RefForwardingComponent<
     foundationRef.current.init()
 
     return () => {
-      foundationRef.current.destroy()
+      foundationRef.current?.destroy()
     }
   }, [addClass, addScrollAreaClass, getScrollContentWidth, removeClass])
 
@@ -176,33 +176,33 @@ const TabScroller: React.RefForwardingComponent<
   )
 
   const handleWheel = (evt: React.WheelEvent<HTMLDivElement>) => {
-    onWheel && onWheel(evt)
-    foundationRef.current.handleInteraction()
+    onWheel?.(evt)
+    foundationRef.current?.handleInteraction()
   }
 
   const handleTouchStart = (evt: React.TouchEvent<HTMLDivElement>) => {
-    onTouchStart && onTouchStart(evt)
-    foundationRef.current.handleInteraction()
+    onTouchStart?.(evt)
+    foundationRef.current?.handleInteraction()
   }
 
   const handlePointerDown = (evt: React.PointerEvent<HTMLDivElement>) => {
-    onPointerDown && onPointerDown(evt)
-    foundationRef.current.handleInteraction()
+    onPointerDown?.(evt)
+    foundationRef.current?.handleInteraction()
   }
 
   const handleMouseDown = (evt: React.MouseEvent<HTMLDivElement>) => {
-    onMouseDown && onMouseDown(evt)
-    foundationRef.current.handleInteraction()
+    onMouseDown?.(evt)
+    foundationRef.current?.handleInteraction()
   }
 
   const handleKeyDown = (evt: React.KeyboardEvent<HTMLDivElement>) => {
-    onKeyDown && onKeyDown(evt)
-    foundationRef.current.handleInteraction()
+    onKeyDown?.(evt)
+    foundationRef.current?.handleInteraction()
   }
 
   const handleTransitionEnd = (evt: React.TransitionEvent<HTMLDivElement>) => {
-    onTransitionEnd && onTransitionEnd(evt)
-    foundationRef.current.handleTransitionEnd(evt.nativeEvent)
+    onTransitionEnd?.(evt)
+    foundationRef.current?.handleTransitionEnd(evt.nativeEvent)
   }
 
   const areaClasses = classNames(

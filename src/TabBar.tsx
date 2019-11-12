@@ -17,7 +17,7 @@ export interface TabBarProps extends React.HTMLAttributes<HTMLDivElement> {
   isRtl?: boolean
 }
 
-const useLatestRef = <T extends {}>(value: T) => {
+const useLatestRef = <T extends any>(value: T) => {
   const ref = useRef<T>(value)
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const TabBar: React.FC<TabBarProps> = ({
   const tabScrollerRef = useRef<TabScrollerRef>(null)
   const tabList = useRef<any[]>([])
   const idIndexMap = useRef<{ [id: string]: number }>({})
-  const foundationRef = useRef<MDCTabBarFoundation>(null)
+  const foundationRef = useRef<MDCTabBarFoundation | null>(null)
   const previousActiveIndex = useRef<number>(-1)
 
   const isRtlRef = useLatestRef(isRtl)
@@ -52,35 +52,22 @@ const TabBar: React.FC<TabBarProps> = ({
   useEffect(() => {
     const adapter: MDCTabBarAdapter = {
       scrollTo: (scrollX: number) => {
-        tabScrollerRef.current && tabScrollerRef.current.scrollTo(scrollX)
+        tabScrollerRef.current?.scrollTo(scrollX)
       },
       incrementScroll: (scrollXIncrement: number) => {
-        tabScrollerRef.current &&
-          tabScrollerRef.current.incrementScroll(scrollXIncrement)
+        tabScrollerRef.current?.incrementScroll(scrollXIncrement)
       },
       getScrollPosition: () => {
-        if (!tabScrollerRef.current) {
-          return 0
-        }
-        return tabScrollerRef.current.getScrollPosition()
+        return tabScrollerRef.current?.getScrollPosition() ?? 0
       },
       getScrollContentWidth: () => {
-        if (!tabScrollerRef.current) {
-          return 0
-        }
-        return tabScrollerRef.current.getScrollContentWidth()
+        return tabScrollerRef.current?.getScrollContentWidth() ?? 0
       },
       getOffsetWidth: () => {
-        if (!tabBarRef.current) {
-          return 0
-        }
-        return tabBarRef.current.offsetWidth
+        return tabBarRef.current?.offsetWidth ?? 0
       },
       isRTL: () => !!isRtlRef.current,
       setActiveTab: (index: number) => {
-        if (!onActiveIndexUpdateRef.current) {
-          return
-        }
         onActiveIndexUpdateRef.current(index)
       },
       activateTabAtIndex: (index: number, clientRect: ClientRect) => {
@@ -118,7 +105,7 @@ const TabBar: React.FC<TabBarProps> = ({
         return tabList.current.length
       },
       notifyTabActivated: (index: number) => {
-        onActivatedRef.current && onActivatedRef.current(index)
+        onActivatedRef.current?.(index)
       },
     }
 
@@ -126,7 +113,7 @@ const TabBar: React.FC<TabBarProps> = ({
     foundationRef.current.init()
 
     return () => {
-      foundationRef.current.destroy()
+      foundationRef.current?.destroy()
     }
   }, [
     isRtlRef,
@@ -138,21 +125,19 @@ const TabBar: React.FC<TabBarProps> = ({
   ])
 
   useEffect(() => {
-    foundationRef.current.scrollIntoView(indexInView)
+    foundationRef.current?.scrollIntoView(indexInView)
   }, [indexInView])
 
   useEffect(() => {
-    foundationRef.current.activateTab(activeIndex)
+    foundationRef.current?.activateTab(activeIndex)
 
     previousActiveIndex.current = activeIndex
   }, [activeIndex])
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     previousActiveIndex.current = activeIndex
-    foundationRef.current.handleKeyDown(e.nativeEvent)
-    if (onKeyDown) {
-      onKeyDown(e)
-    }
+    foundationRef.current?.handleKeyDown(e.nativeEvent)
+    onKeyDown?.(e)
   }
 
   const context = useMemo(
