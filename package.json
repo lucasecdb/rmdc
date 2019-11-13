@@ -24,7 +24,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "tsdx lint src"
+      "pre-push": "yarn lint"
     }
   },
   "dependencies": {
