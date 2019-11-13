@@ -1,5 +1,5 @@
 {
-  "buildCommand": "yarn workspace @lucasecdb/rmdc build",
+  "buildCommand": "workspace @lucasecdb/rmdc build",
   "packages": ["packages/rmdc"],
   "sandboxes": ["new", "/example"]
 }
