@@ -1,4 +1,7 @@
 {
   "private": true,
+  "scripts": {
+    "build": "yarn workspace @lucasecdb/rmdc build"
+  },
   "workspaces": ["packages/*"]
 }

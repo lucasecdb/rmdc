@@ -1,5 +1,4 @@
 {
-  "buildCommand": "workspace @lucasecdb/rmdc build",
   "packages": ["packages/rmdc"],
   "sandboxes": ["new", "/example"]
 }
