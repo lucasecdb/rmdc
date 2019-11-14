@@ -23,6 +23,18 @@ const ensureDistFolder = () => {
   return fsp.mkdir(paths.appDist, { recursive: true })
 }
 
+const moveTypes = async () => {
+  try {
+    // Move the typescript types to the base of the ./dist folder
+    await fsp.copy(paths.appDist + '/src', paths.appDist, {
+      overwrite: true,
+    })
+    await fsp.remove(paths.appDist + '/src')
+  } catch (_) {
+    //
+  }
+}
+
 const build = async () => {
   const packageJson = await fsp
     .readFile(paths.appPackageJson)
@@ -63,6 +75,7 @@ const build = async () => {
     buildConfigs.map(async config => {
       const bundle = await rollup(config)
       await bundle.write(config.output)
+      await moveTypes()
     })
   )
 }
