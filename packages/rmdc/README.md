@@ -12,7 +12,7 @@ see the components in action in our example app.
 This library was created because the official adapter implementation for React was abandoned. The repo can be found [here](https://github.com/material-components/material-components-web-react).
 Also, there were [some issues](https://github.com/material-components/material-components-web/issues/4357) with the foundation
 implementation, which made the React components that used solely the foundation a bit awkward. These components weren't syncing
-with the props passed, because the foundation kept a internal state which was made impossible to change via it's public API.
+with the props passed, because the foundation kept an internal state which was made impossible to change via it's public API.
 
 ## Installation
 
