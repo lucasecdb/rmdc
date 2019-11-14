@@ -43,6 +43,7 @@
     "@material/tab-bar": "^3.1.0",
     "@material/tab-indicator": "^3.1.0",
     "@material/tab-scroller": "^3.1.0",
+    "@material/textfield": "^4.0.0",
     "@material/top-app-bar": "^3.1.0",
     "@material/typography": "^3.1.0",
     "classnames": "^2.2.6",
