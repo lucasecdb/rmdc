@@ -1,6 +1,8 @@
-# Material Design Components
+# React Material Design Components
 
-[![Build Status](https://travis-ci.com/lucasecdb/rmdc.svg?branch=master)](https://travis-ci.com/lucasecdb/rmdc)
+[![Build Status](https://img.shields.io/travis/com/lucasecdb/rmdc/master?style=flat-square)](https://travis-ci.com/lucasecdb/rmdc)
+[![NPM](https://img.shields.io/npm/v/@lucasecdb/rmdc?style=flat-square)](https://www.npmjs.com/package/@lucasecdb/rmdc)
+[![License](https://img.shields.io/github/license/lucasecdb/rmdc?style=flat-square)](https://github.com/lucasecdb/rmdc/blob/master/LICENSE)
 
 This library is a [React](https://reactjs.org) adapter for the [Material Design Components for Web](https://github.com/material-components/material-components-web) package.
 We aim to support all components currently implemented in MDC Web, but we are not there yet. Bellow you can find a table
