@@ -11,7 +11,7 @@ export interface LineRippleProps extends React.HTMLProps<HTMLDivElement> {
   rippleCenter?: number
 }
 
-const LineRipple: React.FC<LineRippleProps> = ({
+export const LineRipple: React.FC<LineRippleProps> = ({
   style,
   className,
   active = false,
@@ -84,5 +84,3 @@ const LineRipple: React.FC<LineRippleProps> = ({
     />
   )
 }
-
-export default LineRipple

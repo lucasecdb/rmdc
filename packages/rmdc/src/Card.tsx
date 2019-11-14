@@ -224,7 +224,7 @@ export interface CardProps extends React.HTMLProps<HTMLDivElement> {
   outlined?: boolean
 }
 
-const Card: React.FunctionComponent<CardProps> = ({
+export const Card: React.FunctionComponent<CardProps> = ({
   children,
   className = '',
   outlined = false,
@@ -239,5 +239,3 @@ const Card: React.FunctionComponent<CardProps> = ({
     </div>
   )
 }
-
-export default Card

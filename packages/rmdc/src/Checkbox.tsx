@@ -26,7 +26,10 @@ export interface CheckboxRef {
   ripple: MDCRippleFoundation
 }
 
-const Checkbox: React.RefForwardingComponent<CheckboxRef, CheckboxProps> = (
+const CheckboxComponent: React.RefForwardingComponent<
+  CheckboxRef,
+  CheckboxProps
+> = (
   {
     checked,
     className,
@@ -194,4 +197,4 @@ const Checkbox: React.RefForwardingComponent<CheckboxRef, CheckboxProps> = (
   )
 }
 
-export default React.forwardRef(Checkbox)
+export const Checkbox = React.forwardRef(CheckboxComponent)

@@ -4,7 +4,7 @@ import classNames from 'classnames'
 
 import { Ripple } from './Ripple'
 import { useTabBar } from './TabBar'
-import TabIndicator from './TabIndicator'
+import { TabIndicator } from './TabIndicator'
 import useClassList from './hooks/useClassList'
 import useId from './hooks/useId'
 
@@ -19,7 +19,7 @@ export interface TabProps
   onInteraction?: () => void
 }
 
-const Tab: React.FC<TabProps> = ({
+export const Tab: React.FC<TabProps> = ({
   focusOnActivate = true,
   className,
   isFadingIndicator = false,
@@ -174,5 +174,3 @@ const Tab: React.FC<TabProps> = ({
     </button>
   )
 }
-
-export default Tab

@@ -21,7 +21,7 @@ export interface SnackbarProps {
   onAnnounce?: () => void
 }
 
-const Snackbar: React.FC<SnackbarProps> = ({
+export const Snackbar: React.FC<SnackbarProps> = ({
   message,
   actionText,
   timeoutMs,
@@ -133,5 +133,3 @@ const Snackbar: React.FC<SnackbarProps> = ({
     </div>
   )
 }
-
-export default Snackbar

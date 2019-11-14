@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import { FocusTrap } from 'focus-trap'
 import React, { useEffect, useReducer, useRef } from 'react'
 
-import Button from './Button'
+import { Button } from './Button'
 
 type DivAttributes = React.HTMLAttributes<HTMLDivElement>
 
@@ -126,7 +126,7 @@ const reducer = (state: DialogState, action: Action): DialogState => {
   }
 }
 
-interface DialogProps extends DivAttributes {
+export interface DialogProps extends DivAttributes {
   autoStackButtons?: boolean
   className?: string
   role?: 'alertdialog' | 'dialog'
@@ -134,7 +134,7 @@ interface DialogProps extends DivAttributes {
   onClose: () => void
 }
 
-const Dialog: React.FC<DialogProps> = ({
+export const Dialog: React.FC<DialogProps> = ({
   children,
   className,
   role = 'alertdialog',
@@ -240,5 +240,3 @@ const Dialog: React.FC<DialogProps> = ({
     </div>
   )
 }
-
-export default Dialog

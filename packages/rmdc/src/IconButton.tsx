@@ -8,12 +8,12 @@ import React, { useEffect, useRef, useState } from 'react'
 import useClassList from './hooks/useClassList'
 import { useRipple } from './Ripple'
 
-interface ToggleProps {
+export interface IconButtonToggleProps {
   on?: boolean
   className?: string
 }
 
-export const IconButtonToggle: React.FC<ToggleProps> = ({
+export const IconButtonToggle: React.FC<IconButtonToggleProps> = ({
   on = false,
   className = '',
   children,
@@ -25,11 +25,11 @@ export const IconButtonToggle: React.FC<ToggleProps> = ({
   return <div className={classes}>{children}</div>
 }
 
-type Props =
+export type IconButtonProps =
   | React.ButtonHTMLAttributes<HTMLButtonElement>
   | ({ href: string } & React.AnchorHTMLAttributes<HTMLAnchorElement>)
 
-const IconButton: React.FC<Props> = ({
+export const IconButton: React.FC<IconButtonProps> = ({
   className,
   style,
   children,
@@ -105,5 +105,3 @@ const IconButton: React.FC<Props> = ({
     </button>
   )
 }
-
-export default IconButton

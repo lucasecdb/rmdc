@@ -11,14 +11,14 @@ interface InputRef {
   ripple: MDCRippleFoundation
 }
 
-interface Props {
+export interface FormFieldProps {
   label: React.ReactNode
   input: React.ReactElement<React.RefAttributes<InputRef>>
   inputId?: string
   alignEnd?: boolean
 }
 
-const FormField: React.FC<Props> = ({
+export const FormField: React.FC<FormFieldProps> = ({
   label,
   alignEnd = false,
   input,
@@ -67,5 +67,3 @@ const FormField: React.FC<Props> = ({
     </div>
   )
 }
-
-export default FormField

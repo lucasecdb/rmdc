@@ -37,7 +37,7 @@ const renderIcon = (
       })
     : null
 
-const Button: React.FC<Props> = ({
+export const Button: React.FC<Props> = ({
   className = '',
   raised = false,
   unelevated = false,
@@ -49,7 +49,7 @@ const Button: React.FC<Props> = ({
   style,
   ...props
 }) => {
-  const ref = useRef<any>(null)
+  const ref = useRef<HTMLAnchorElement & HTMLButtonElement>(null)
 
   const { rippleStyle, rippleClasses } = useRipple({ surfaceRef: ref })
 
@@ -83,5 +83,3 @@ const Button: React.FC<Props> = ({
     </button>
   )
 }
-
-export default Button

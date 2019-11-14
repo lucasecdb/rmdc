@@ -14,7 +14,7 @@ export interface NotchedOutlineProps extends React.HTMLProps<HTMLDivElement> {
   notch?: boolean
 }
 
-const NotchedOutline: React.FC<NotchedOutlineProps> = ({
+export const NotchedOutline: React.FC<NotchedOutlineProps> = ({
   className = '',
   notchWidth = 0,
   notch = false,
@@ -101,5 +101,3 @@ const NotchedOutline: React.FC<NotchedOutlineProps> = ({
     </div>
   )
 }
-
-export default NotchedOutline

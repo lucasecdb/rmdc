@@ -31,7 +31,7 @@ export interface TabScrollerRef {
   scrollTo(scroll: number): void
 }
 
-const TabScroller: React.RefForwardingComponent<
+const TabScrollerComponent: React.RefForwardingComponent<
   TabScrollerRef,
   TabScrollerProps
 > = (
@@ -235,4 +235,4 @@ const TabScroller: React.RefForwardingComponent<
   )
 }
 
-export default React.forwardRef(TabScroller)
+export const TabScroller = React.forwardRef(TabScrollerComponent)

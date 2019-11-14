@@ -6,7 +6,7 @@ interface Props {
   size?: number
 }
 
-const CircularProgress: React.FC<Props> = ({ size, className }) => {
+export const CircularProgress: React.FC<Props> = ({ size, className }) => {
   return (
     <div
       className={classNames(className, 'mdc-circular-progress')}
@@ -28,5 +28,3 @@ const CircularProgress: React.FC<Props> = ({ size, className }) => {
     </div>
   )
 }
-
-export default CircularProgress

@@ -172,7 +172,7 @@ export interface TopAppBarProps extends React.HTMLProps<HTMLElement> {
   onNavIconClicked?: () => void
 }
 
-const TopAppBar: React.FC<TopAppBarProps> = ({
+export const TopAppBar: React.FC<TopAppBarProps> = ({
   children,
   className = '',
   dense = false,
@@ -304,5 +304,3 @@ const TopAppBar: React.FC<TopAppBarProps> = ({
     </header>
   )
 }
-
-export default TopAppBar

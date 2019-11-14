@@ -15,7 +15,7 @@ export interface FloatingLabelProps
   float?: boolean
 }
 
-const FloatingLabel: React.RefForwardingComponent<
+export const FloatingLabel: React.RefForwardingComponent<
   { shake: () => void },
   FloatingLabelProps
 > = (
@@ -78,5 +78,3 @@ const FloatingLabel: React.RefForwardingComponent<
     </label>
   )
 }
-
-export default FloatingLabel

@@ -25,7 +25,7 @@ interface TabIndicatorRef {
   computeContentClientRect: () => ClientRect
 }
 
-const TabIndicator: React.RefForwardingComponent<
+const TabIndicatorComponent: React.RefForwardingComponent<
   TabIndicatorRef,
   TabIndicatorProps
 > = (
@@ -176,4 +176,4 @@ const TabIndicator: React.RefForwardingComponent<
   )
 }
 
-export default React.forwardRef(TabIndicator)
+export const TabIndicator = React.forwardRef(TabIndicatorComponent)

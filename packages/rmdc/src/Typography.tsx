@@ -47,7 +47,10 @@ export const Body2 = typography({
   tag: 'p',
 })
 
-export const Button = typography({
+// This need to be `ButtonSpan` because
+// we already have an export named "Button",
+// which is the actual button component
+export const ButtonSpan = typography({
   classSuffix: 'button',
   tag: 'span',
 })
@@ -101,3 +104,21 @@ export const Subtitle2 = typography({
   classSuffix: 'subtitle2',
   tag: 'h6',
 })
+
+const Typography = {
+  Body1,
+  Body2,
+  Button: ButtonSpan,
+  Caption,
+  Headline1,
+  Headline2,
+  Headline3,
+  Headline4,
+  Headline5,
+  Headline6,
+  Overline,
+  Subtitle1,
+  Subtitle2,
+}
+
+export { Typography as t }

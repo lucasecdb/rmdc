@@ -4,14 +4,14 @@ import React, { useRef } from 'react'
 import { useRipple } from './Ripple'
 import { IconTypes } from './IconTypes'
 
-interface Props extends React.HTMLAttributes<HTMLElement> {
+export interface IconProps extends React.HTMLAttributes<HTMLElement> {
   icon?: IconTypes
   className?: string
   rippled?: boolean
   unbounded?: boolean
 }
 
-const Icon: React.FunctionComponent<Props> = ({
+export const Icon: React.FunctionComponent<IconProps> = ({
   icon = '',
   className,
   unbounded = true,
@@ -35,5 +35,3 @@ const Icon: React.FunctionComponent<Props> = ({
     </i>
   )
 }
-
-export default Icon

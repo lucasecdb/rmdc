@@ -2,7 +2,7 @@ import { MDCTabBarAdapter, MDCTabBarFoundation } from '@material/tab-bar'
 import classNames from 'classnames'
 import React, { useContext, useEffect, useMemo, useRef } from 'react'
 
-import TabScroller, { TabScrollerRef } from './TabScroller'
+import { TabScroller, TabScrollerRef } from './TabScroller'
 
 const TabBarContext = React.createContext<any>({})
 
@@ -27,7 +27,7 @@ const useLatestRef = <T extends any>(value: T) => {
   return ref
 }
 
-const TabBar: React.FC<TabBarProps> = ({
+export const TabBar: React.FC<TabBarProps> = ({
   className,
   indexInView = 0,
   activeIndex = 0,
@@ -182,5 +182,3 @@ const TabBar: React.FC<TabBarProps> = ({
     </TabBarContext.Provider>
   )
 }
-
-export default TabBar
