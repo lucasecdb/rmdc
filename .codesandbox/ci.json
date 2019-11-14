@@ -1,4 +1,5 @@
 {
+  "buildCommand": "build",
   "packages": ["packages/rmdc"],
   "sandboxes": ["new", "/example"]
 }
