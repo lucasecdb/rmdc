@@ -4,6 +4,7 @@ import { t } from '@lucasecdb/rmdc'
 
 import ButtonShowcase from './ButtonShowcase'
 import CheckboxShowcase from './CheckboxShowcase'
+import TextFieldShowcase from './TextFieldShowcase'
 
 import '@lucasecdb/rmdc/rmdc.css'
 import './styles.css'
@@ -15,6 +16,7 @@ const App = () => {
       <hr />
       <ButtonShowcase />
       <CheckboxShowcase />
+      <TextFieldShowcase />
     </div>
   )
 }
