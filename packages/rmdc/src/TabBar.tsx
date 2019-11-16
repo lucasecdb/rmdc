@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import React, { useContext, useEffect, useMemo, useRef } from 'react'
 
 import { TabScroller, TabScrollerRef } from './TabScroller'
+import useLatestRef from './hooks/useLatestRef'
 
 const TabBarContext = React.createContext<any>({})
 
@@ -15,16 +16,6 @@ export interface TabBarProps extends React.HTMLAttributes<HTMLDivElement> {
   onActivated?: (index: number) => void
   className?: string
   isRtl?: boolean
-}
-
-const useLatestRef = <T extends any>(value: T) => {
-  const ref = useRef<T>(value)
-
-  useEffect(() => {
-    ref.current = value
-  }, [value])
-
-  return ref
 }
 
 export const TabBar: React.FC<TabBarProps> = ({
