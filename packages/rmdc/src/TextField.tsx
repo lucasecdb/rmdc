@@ -3,7 +3,7 @@ import {
   MDCTextFieldRootAdapter,
 } from '@material/textfield'
 import classNames from 'classnames'
-import React, { useContext, useEffect, useMemo, useRef } from 'react'
+import React, { useContext, useEffect, useMemo, useRef, useState } from 'react'
 
 import useClassList from './hooks/useClassList'
 import { NotchedOutline } from './NotchedOutline'
@@ -81,6 +81,8 @@ export const TextField: React.FC<TextFieldProps> = ({
   children,
   ...props
 }) => {
+  const [lineRippleActive, setLineRippleActive] = useState(false)
+  const [lineRippleOrigin, setLineRippleOrigin] = useState(0)
   const { addClass, removeClass, classList } = useClassList()
   const foundationRef = useRef<MDCTextFieldFoundation | null>(null)
 
@@ -91,6 +93,13 @@ export const TextField: React.FC<TextFieldProps> = ({
   }, [classList])
 
   useEffect(() => {
+    const lineRippleAdapter: MDCTextFieldLineRippleAdapter = {
+      activateLineRipple: () => setLineRippleActive(true),
+      deactivateLineRipple: () => setLineRippleActive(false),
+      setLineRippleTransformOrigin: normalizedX =>
+        setLineRippleOrigin(normalizedX),
+    }
+
     const adapter: MDCTextFieldRootAdapter = {
       addClass,
       removeClass,
@@ -104,7 +113,9 @@ export const TextField: React.FC<TextFieldProps> = ({
       deregisterValidationAttributeChangeHandler: noop,
     }
 
-    foundationRef.current = new MDCTextFieldFoundation(adapter)
+    foundationRef.current = new MDCTextFieldFoundation(
+      Object.assign({}, adapter, lineRippleAdapter)
+    )
     foundationRef.current.init()
 
     return () => {
@@ -118,13 +129,31 @@ export const TextField: React.FC<TextFieldProps> = ({
     'mdc-text-field--textarea': textarea,
   })
 
+  const handleFocus = () => {
+    foundationRef.current?.activateFocus()
+  }
+
+  const handleBlur = () => {
+    foundationRef.current?.deactivateFocus()
+  }
+
   const context = useMemo(() => ({ textarea }), [textarea])
 
   return (
     <ctx.Provider value={context}>
-      <div className={classes} {...props}>
+      <div
+        className={classes}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        {...props}
+      >
         {children}
-        {!outlined && !fullWidth && <LineRipple />}
+        {!outlined && !fullWidth && !textarea && (
+          <LineRipple
+            active={lineRippleActive}
+            rippleCenter={lineRippleOrigin}
+          />
+        )}
       </div>
     </ctx.Provider>
   )
