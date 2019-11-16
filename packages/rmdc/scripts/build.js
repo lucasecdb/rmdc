@@ -30,8 +30,8 @@ const moveTypes = async () => {
       overwrite: true,
     })
     await fsp.remove(paths.appDist + '/src')
-  } catch (err) {
-    console.error(err)
+  } catch (_) {
+    // suppress error
   }
 }
 
