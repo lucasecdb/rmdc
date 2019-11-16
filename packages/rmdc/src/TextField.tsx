@@ -1,5 +1,6 @@
 import {
   MDCTextFieldFoundation,
+  MDCTextFieldLineRippleAdapter,
   MDCTextFieldRootAdapter,
 } from '@material/textfield'
 import classNames from 'classnames'
@@ -7,6 +8,7 @@ import React, { useContext, useEffect, useMemo, useRef, useState } from 'react'
 
 import useClassList from './hooks/useClassList'
 import { NotchedOutline } from './NotchedOutline'
+import { FloatingLabel } from './FloatingLabel'
 import { LineRipple } from './LineRipple'
 
 const noop = () => {}
@@ -40,18 +42,12 @@ export const Label: React.FC<TextFieldLabelProps> = ({ children }) => {
   if (textarea) {
     return (
       <NotchedOutline>
-        <label htmlFor="textarea" className="mdc-floating-label">
-          {children}
-        </label>
+        <FloatingLabel>{children}</FloatingLabel>
       </NotchedOutline>
     )
   }
 
-  return (
-    <label className="mdc-floating-label" htmlFor="my-text-field">
-      {children}
-    </label>
-  )
+  return <FloatingLabel>{children}</FloatingLabel>
 }
 
 export const Input: React.FC<TextFieldInputProps> = () => {
