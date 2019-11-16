@@ -1,5 +1,5 @@
 const path = require('path')
-const { promises: fsp } = require('fs')
+const fsp = require('fs-extra')
 const { rollup } = require('rollup')
 
 const { safePackageName } = require('../config/utils')
@@ -30,8 +30,8 @@ const moveTypes = async () => {
       overwrite: true,
     })
     await fsp.remove(paths.appDist + '/src')
-  } catch (_) {
-    //
+  } catch (err) {
+    console.error(err)
   }
 }
 
