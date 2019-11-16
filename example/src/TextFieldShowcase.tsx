@@ -1,11 +1,13 @@
 import * as React from 'react'
 import { Input, Label, TextField, t } from '@lucasecdb/rmdc'
 
+import styles from './TextFieldShowcase.module.css'
+
 const TextFieldShowcase: React.FC = () => {
   return (
     <>
       <t.Caption>Text fields</t.Caption>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <div className={styles.group}>
         <TextField>
           <Input />
           <Label>Hello</Label>
