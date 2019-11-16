@@ -1134,32 +1134,6 @@
     classnames "^2.2.6"
     uuid "^3.3.3"
 
-"@lucasecdb/rmdc@../packages/rmdc/":
-  version "0.1.6"
-  dependencies:
-    "@material/button" "^3.1.0"
-    "@material/card" "^3.1.0"
-    "@material/checkbox" "^3.1.0"
-    "@material/dialog" "^3.1.0"
-    "@material/dom" "^3.1.0"
-    "@material/fab" "^3.1.0"
-    "@material/floating-label" "^3.1.0"
-    "@material/form-field" "^3.1.0"
-    "@material/icon-button" "^3.1.0"
-    "@material/line-ripple" "^3.1.0"
-    "@material/notched-outline" "^3.1.0"
-    "@material/ripple" "^3.1.0"
-    "@material/snackbar" "^3.1.0"
-    "@material/tab" "^3.1.0"
-    "@material/tab-bar" "^3.1.0"
-    "@material/tab-indicator" "^3.1.0"
-    "@material/tab-scroller" "^3.1.0"
-    "@material/textfield" "^3.2.0"
-    "@material/top-app-bar" "^3.1.0"
-    "@material/typography" "^3.1.0"
-    classnames "^2.2.6"
-    uuid "^3.3.3"
-
 "@material/animation@^3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@material/animation/-/animation-3.1.0.tgz#ab04e7c2e92ab370a2b28d12af1b88538d23014f"

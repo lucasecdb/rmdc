@@ -3,10 +3,21 @@ import {
   MDCTextFieldRootAdapter,
 } from '@material/textfield'
 import classNames from 'classnames'
-import React, { useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useMemo, useRef } from 'react'
+
 import useClassList from './hooks/useClassList'
+import { NotchedOutline } from './NotchedOutline'
+import { LineRipple } from './LineRipple'
 
 const noop = () => {}
+
+interface ContextType {
+  textarea: boolean
+}
+
+const ctx = React.createContext<ContextType>({
+  textarea: false,
+})
 
 export interface TextFieldProps extends React.HTMLAttributes<HTMLDivElement> {
   fullWidth: boolean
@@ -14,11 +25,60 @@ export interface TextFieldProps extends React.HTMLAttributes<HTMLDivElement> {
   textarea: boolean
 }
 
+export interface TextFieldLabelProps {
+  label?: React.ReactNode
+}
+
+export interface TextFieldInputProps {
+  value?: string
+  onChange?: (evt: React.ChangeEvent<HTMLInputElement>) => void
+}
+
+export const Label: React.FC<TextFieldLabelProps> = ({ children }) => {
+  const { textarea } = useContext(ctx)
+
+  if (textarea) {
+    return (
+      <NotchedOutline>
+        <label htmlFor="textarea" className="mdc-floating-label">
+          {children}
+        </label>
+      </NotchedOutline>
+    )
+  }
+
+  return (
+    <label className="mdc-floating-label" htmlFor="my-text-field">
+      {children}
+    </label>
+  )
+}
+
+export const Input: React.FC<TextFieldInputProps> = () => {
+  const { textarea } = useContext(ctx)
+
+  if (textarea) {
+    return (
+      <textarea
+        id="textarea"
+        className="mdc-text-field__input"
+        rows={8}
+        cols={40}
+      />
+    )
+  }
+
+  return (
+    <input type="text" id="tf-outlined" className="mdc-text-field__input" />
+  )
+}
+
 export const TextField: React.FC<TextFieldProps> = ({
   fullWidth = false,
   outlined = false,
   textarea = false,
   className,
+  children,
   ...props
 }) => {
   const { addClass, removeClass, classList } = useClassList()
@@ -58,13 +118,14 @@ export const TextField: React.FC<TextFieldProps> = ({
     'mdc-text-field--textarea': textarea,
   })
 
+  const context = useMemo(() => ({ textarea }), [textarea])
+
   return (
-    <div className={classes} {...props}>
-      <input type="text" id="my-text-field" className="mdc-text-field__input" />
-      <label className="mdc-floating-label" htmlFor="my-text-field">
-        Hint text
-      </label>
-      <div className="mdc-line-ripple"></div>
-    </div>
+    <ctx.Provider value={context}>
+      <div className={classes} {...props}>
+        {children}
+        {!outlined && !fullWidth && <LineRipple />}
+      </div>
+    </ctx.Provider>
   )
 }
