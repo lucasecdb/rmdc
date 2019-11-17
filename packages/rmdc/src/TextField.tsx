@@ -28,6 +28,7 @@ const noop = () => {}
 interface ContextType {
   textarea: boolean
   outlined: boolean
+  registerInput: (ref: (HTMLInputElement & HTMLTextAreaElement) | null) => void
   registerLabel: (ref: any) => void
   labelFloat: boolean
   onLabelWidthChange: (width: number) => void
@@ -38,6 +39,7 @@ interface ContextType {
 const ctx = React.createContext<ContextType>({
   textarea: false,
   outlined: false,
+  registerInput: noop,
   registerLabel: noop,
   onLabelWidthChange: noop,
   labelFloat: false,
@@ -99,12 +101,17 @@ export const Label: React.FC<TextFieldLabelProps> = ({ children }) => {
 }
 
 export const Input: React.FC<TextFieldInputProps> = () => {
-  const { textarea } = useContext(ctx)
+  const inputRef = useRef<HTMLInputElement & HTMLTextAreaElement>(null)
+  const { textarea, registerInput } = useContext(ctx)
+
+  useEffect(() => {
+    registerInput(inputRef.current)
+  }, [registerInput])
 
   if (textarea) {
     return (
       <textarea
-        id="textarea"
+        ref={inputRef}
         className="mdc-text-field__input"
         rows={8}
         cols={40}
@@ -112,9 +119,7 @@ export const Input: React.FC<TextFieldInputProps> = () => {
     )
   }
 
-  return (
-    <input type="text" id="tf-outlined" className="mdc-text-field__input" />
-  )
+  return <input type="text" className="mdc-text-field__input" ref={inputRef} />
 }
 
 export const TextField: React.FC<TextFieldProps> = ({
@@ -131,6 +136,7 @@ export const TextField: React.FC<TextFieldProps> = ({
   const { addClass, removeClass, classList } = useClassList()
   const foundationRef = useRef<MDCTextFieldFoundation | null>(null)
 
+  const inputRef = useRef<(HTMLInputElement & HTMLTextAreaElement) | null>(null)
   const [isFocused, setFocused] = useState(false)
   const [labelFloat, setLabelFloat] = useState(false)
   const labelRef = useRef<any | null>(null)
@@ -142,7 +148,6 @@ export const TextField: React.FC<TextFieldProps> = ({
   const labelWidthRef = useLatestRef(labelWidth)
   const outlinedRef = useLatestRef(outlined)
   const textareaRef = useLatestRef(textarea)
-  const nativeInputRef = useLatestRef(null)
   const isFocusedRef = useLatestRef(isFocused)
 
   useEffect(() => {
@@ -181,7 +186,9 @@ export const TextField: React.FC<TextFieldProps> = ({
 
     const inputAdapter: MDCTextFieldInputAdapter = {
       isFocused: () => isFocusedRef.current,
-      getNativeInput: () => nativeInputRef.current,
+      // use Object.assign to handle MDC a readonly copy of the
+      // input element
+      getNativeInput: () => Object.assign({}, inputRef.current),
 
       registerInputInteractionHandler: noop,
       deregisterInputInteractionHandler: noop,
@@ -221,7 +228,6 @@ export const TextField: React.FC<TextFieldProps> = ({
     classListRef,
     isFocusedRef,
     labelWidthRef,
-    nativeInputRef,
     outlinedRef,
     removeClass,
     textareaRef,
@@ -249,6 +255,10 @@ export const TextField: React.FC<TextFieldProps> = ({
     labelRef.current = ref
   }, [])
 
+  const registerInput = useCallback((ref: any) => {
+    inputRef.current = ref
+  }, [])
+
   const onLabelWidthChange = useCallback((width: number) => {
     setLabelWidth(width)
   }, [])
@@ -259,6 +269,7 @@ export const TextField: React.FC<TextFieldProps> = ({
       outlined,
       labelFloat,
       registerLabel,
+      registerInput,
       onLabelWidthChange,
       notchActive,
       notchWidth,
@@ -269,6 +280,7 @@ export const TextField: React.FC<TextFieldProps> = ({
       notchWidth,
       onLabelWidthChange,
       outlined,
+      registerInput,
       registerLabel,
       textarea,
     ]
