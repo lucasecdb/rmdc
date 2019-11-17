@@ -186,9 +186,16 @@ export const TextField: React.FC<TextFieldProps> = ({
 
     const inputAdapter: MDCTextFieldInputAdapter = {
       isFocused: () => isFocusedRef.current,
-      // use Object.assign to handle MDC a readonly copy of the
+      // use plain object to handle MDC a readonly copy of the
       // input element
-      getNativeInput: () => Object.assign({}, inputRef.current),
+      getNativeInput: () => ({
+        value: inputRef.current?.value ?? '',
+        disabled: inputRef.current?.disabled ?? false,
+        maxLength: inputRef.current?.maxLength ?? 0,
+        type: inputRef.current?.type ?? '',
+        validity:
+          inputRef.current?.validity ?? ({ valid: true } as ValidityState),
+      }),
 
       registerInputInteractionHandler: noop,
       deregisterInputInteractionHandler: noop,
