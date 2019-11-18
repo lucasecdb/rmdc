@@ -1,7 +1,4 @@
 {
   "packages": ["packages/rmdc"],
-  "publishDirectory": {
-    "@lucasecdb/rmdc": "packages/rmdc"
-  },
   "sandboxes": ["new", "/example"]
 }
