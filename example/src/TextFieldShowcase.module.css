@@ -1,0 +1,12 @@
+.group {
+  display: flex;
+  flex-direction: column;
+}
+
+.group :global(.mdc-text-field):not(:first-child) {
+  margin-top: .5rem;
+}
+
+.group :global(.mdc-text-field):not(:last-child) {
+  margin-bottom: .5rem;
+}

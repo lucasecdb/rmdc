@@ -1128,6 +1128,7 @@
     "@material/tab-bar" "^3.1.0"
     "@material/tab-indicator" "^3.1.0"
     "@material/tab-scroller" "^3.1.0"
+    "@material/textfield" "^3.2.0"
     "@material/top-app-bar" "^3.1.0"
     "@material/typography" "^3.1.0"
     classnames "^2.2.6"
@@ -1285,7 +1286,7 @@
     "@material/theme" "^3.1.0"
     tslib "^1.9.3"
 
-"@material/notched-outline@^3.1.0":
+"@material/notched-outline@^3.1.0", "@material/notched-outline@^3.2.0":
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@material/notched-outline/-/notched-outline-3.2.0.tgz#3b7e79e6282e747a18e97b0d0c79f06eab924aa0"
   integrity sha512-IFuxVoQqlOy/WSSawI2Fglh/U1hS0QtVUiGsc8GUoVUd1pifn7RXidHP3vQrMDEo8M/RwA9p6uveQKjPwW41RA==
@@ -1385,6 +1386,24 @@
     "@material/ripple" "^3.2.0"
     "@material/rtl" "^3.2.0"
     "@material/tab-indicator" "^3.1.0"
+    "@material/theme" "^3.1.0"
+    "@material/typography" "^3.1.0"
+    tslib "^1.9.3"
+
+"@material/textfield@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@material/textfield/-/textfield-3.2.0.tgz#c4272601f9a57f26fd7fce8b3089a5d5d6595ad1"
+  integrity sha512-xPWDkTzurMOxvH0+DsenzboF7dFoUeLcbqX/9vyhWe3aPlO6ZWFNn3lAmYN24ElqR5FEr5zXNYfeIQ4JLT5mYw==
+  dependencies:
+    "@material/animation" "^3.1.0"
+    "@material/base" "^3.1.0"
+    "@material/dom" "^3.1.0"
+    "@material/floating-label" "^3.2.0"
+    "@material/line-ripple" "^3.1.0"
+    "@material/notched-outline" "^3.2.0"
+    "@material/ripple" "^3.2.0"
+    "@material/rtl" "^3.2.0"
+    "@material/shape" "^3.1.0"
     "@material/theme" "^3.1.0"
     "@material/typography" "^3.1.0"
     tslib "^1.9.3"
