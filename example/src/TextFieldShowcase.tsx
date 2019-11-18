@@ -17,7 +17,7 @@ const TextFieldShowcase: React.FC = () => {
           <Label>Outlined input</Label>
         </TextField>
         <TextField textarea>
-          <Input />
+          <Input rows={8} cols={40} />
           <Label>Textarea input</Label>
         </TextField>
       </div>

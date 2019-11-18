@@ -54,16 +54,19 @@ export interface TextFieldProps extends React.HTMLAttributes<HTMLDivElement> {
   noLabel: boolean
 }
 
-export interface TextFieldLabelProps {
+export interface TextFieldLabelProps
+  extends React.LabelHTMLAttributes<HTMLLabelElement> {
   label?: React.ReactNode
 }
 
-export interface TextFieldInputProps {
-  value?: string
-  onChange?: (evt: React.ChangeEvent<HTMLInputElement>) => void
-}
+export type TextFieldInputProps =
+  | React.InputHTMLAttributes<HTMLInputElement>
+  | React.TextareaHTMLAttributes<HTMLTextAreaElement>
 
-export const Label: React.FC<TextFieldLabelProps> = ({ children }) => {
+export const Label: React.FC<TextFieldLabelProps> = ({
+  children,
+  ...props
+}) => {
   const {
     textarea,
     outlined,
@@ -84,6 +87,7 @@ export const Label: React.FC<TextFieldLabelProps> = ({ children }) => {
       ref={labelRef}
       float={labelFloat}
       onWidthChange={onLabelWidthChange}
+      {...props}
     >
       {children}
     </FloatingLabel>
@@ -100,7 +104,17 @@ export const Label: React.FC<TextFieldLabelProps> = ({ children }) => {
   return labelElement
 }
 
-export const Input: React.FC<TextFieldInputProps> = () => {
+const assertTextArea = (
+  textarea: boolean,
+  props: TextFieldInputProps
+): props is React.TextareaHTMLAttributes<HTMLTextAreaElement> => {
+  return textarea && !('type' in props)
+}
+
+export const Input: React.FC<TextFieldInputProps> = ({
+  className = '',
+  ...props
+}) => {
   const inputRef = useRef<HTMLInputElement & HTMLTextAreaElement>(null)
   const { textarea, registerInput } = useContext(ctx)
 
@@ -108,18 +122,26 @@ export const Input: React.FC<TextFieldInputProps> = () => {
     registerInput(inputRef.current)
   }, [registerInput])
 
-  if (textarea) {
+  if (assertTextArea(textarea, props)) {
     return (
       <textarea
         ref={inputRef}
-        className="mdc-text-field__input"
-        rows={8}
-        cols={40}
+        className={classNames(className, 'mdc-text-field__input')}
+        {...props}
       />
     )
   }
 
-  return <input type="text" className="mdc-text-field__input" ref={inputRef} />
+  props = props as React.InputHTMLAttributes<HTMLInputElement>
+
+  return (
+    <input
+      type={props.type || 'text'}
+      className={classNames(className, 'mdc-text-field__input')}
+      ref={inputRef}
+      {...props}
+    />
+  )
 }
 
 export const TextField: React.FC<TextFieldProps> = ({
