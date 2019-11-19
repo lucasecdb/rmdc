@@ -1,0 +1,34 @@
+{
+  "name": "docs",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "start": "gatsby develop",
+    "develop": "gatsby develop",
+    "build": "gatsby build --prefix-paths"
+  },
+  "dependencies": {
+    "@lucasecdb/rmdc": "../packages/rmdc",
+    "@mdx-js/mdx": "^1.5.1",
+    "@mdx-js/react": "^1.5.1",
+    "gatsby": "^2.18.0",
+    "gatsby-plugin-mdx": "^1.0.57",
+    "gatsby-plugin-sass": "^2.1.23",
+    "gatsby-plugin-typescript": "^2.1.18",
+    "gatsby-source-filesystem": "^2.1.38",
+    "node-sass": "^4.13.0",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "typeface-roboto": "^0.0.75"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.11",
+    "@types/react-dom": "^16.8.4",
+    "typescript": "^3.7.2"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ]
+}
