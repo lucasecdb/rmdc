@@ -1,0 +1,13 @@
+.buttonGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px 0;
+}
+
+.buttonGroup :global(.mdc-button):not(:first-child) {
+  margin-left: .5rem;
+}
+
+.buttonGroup :global(.mdc-button):not(:last-child) {
+  margin-right: .5rem;
+}
