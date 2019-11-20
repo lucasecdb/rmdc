@@ -7,8 +7,8 @@ import {
 import classNames from 'classnames'
 import React, { useEffect, useRef, useState } from 'react'
 
-import { Icon, IconProps } from './Icon'
 import useClassList from './hooks/useClassList'
+import { IconButton, IconButtonProps } from './IconButton'
 
 const BASE = 'mdc-top-app-bar'
 const SECTION = `${BASE}__section`
@@ -61,14 +61,14 @@ export const TopAppBarFixedAdjust: React.FunctionComponent<TopAppbarFixedAdjustP
   )
 }
 
-export interface TopAppBarIconProps extends IconProps {
+export interface TopAppBarIconProps {
   actionItem?: boolean
   className?: string
   children: React.ReactElement<any>
   navIcon?: boolean
 }
 
-export const TopAppBarIcon: React.FC<TopAppBarIconProps> = ({
+export const TopAppBarIcon: React.FC<TopAppBarIconProps & IconButtonProps> = ({
   actionItem = false,
   navIcon = false,
   className,
@@ -76,13 +76,15 @@ export const TopAppBarIcon: React.FC<TopAppBarIconProps> = ({
   ...otherProps
 }) => {
   return (
-    <Icon
+    <IconButton
       {...otherProps}
-      className={classNames(className, children.props.className, {
+      className={classNames(className, {
         [CSS_CLASSES.ACTION_ITEM]: actionItem,
         [CSS_CLASSES.NAV_ICON]: navIcon,
       })}
-    />
+    >
+      {children}
+    </IconButton>
   )
 }
 
