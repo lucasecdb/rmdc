@@ -17,5 +17,11 @@ module.exports = {
     'gatsby-plugin-typescript',
     'gatsby-plugin-mdx',
     'gatsby-plugin-sass',
+    {
+      resolve: 'gatsby-plugin-google-fonts',
+      options: {
+        fonts: ['Material+Icons'],
+      },
+    },
   ],
 }
