@@ -1,4 +1,4 @@
 [build]
   base    = "example"
-  command = "yarn --cwd .. build && yarn build"
+  command = "yarn --cwd .. install && yarn --cwd .. build && yarn build"
   publish = "build"
