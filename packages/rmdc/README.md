@@ -1,6 +1,7 @@
 # React Material Design Components
 
 [![Build Status](https://img.shields.io/travis/com/lucasecdb/rmdc/master?style=flat-square)](https://travis-ci.com/lucasecdb/rmdc)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/5f036b38-0b63-4a07-a69f-697887831e26/deploy-status)](https://app.netlify.com/sites/rmdc/deploys)
 [![NPM](https://img.shields.io/npm/v/@lucasecdb/rmdc?style=flat-square)](https://www.npmjs.com/package/@lucasecdb/rmdc)
 [![License](https://img.shields.io/github/license/lucasecdb/rmdc?style=flat-square)](https://github.com/lucasecdb/rmdc/blob/master/LICENSE)
 
