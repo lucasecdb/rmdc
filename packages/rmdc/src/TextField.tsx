@@ -48,10 +48,10 @@ const ctx = React.createContext<ContextType>({
 })
 
 export interface TextFieldProps extends React.HTMLAttributes<HTMLDivElement> {
-  fullWidth: boolean
-  outlined: boolean
-  textarea: boolean
-  noLabel: boolean
+  fullWidth?: boolean
+  outlined?: boolean
+  textarea?: boolean
+  noLabel?: boolean
 }
 
 export interface TextFieldLabelProps
