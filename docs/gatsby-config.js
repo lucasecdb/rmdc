@@ -4,7 +4,6 @@ module.exports = {
   siteMetadata: {
     title: 'RMDC',
     description: 'React Material Design Components',
-    pathPrefix: '/rmdc',
   },
   plugins: [
     {
