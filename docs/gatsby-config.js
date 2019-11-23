@@ -15,6 +15,8 @@ module.exports = {
     },
     'gatsby-plugin-typescript',
     'gatsby-plugin-mdx',
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp',
     'gatsby-plugin-sass',
     {
       resolve: 'gatsby-plugin-google-fonts',
