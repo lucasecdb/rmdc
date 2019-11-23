@@ -15,7 +15,7 @@ import styles from './Layout.module.css'
 const Layout: React.FC = ({ children }) => {
   return (
     <>
-      <TopAppBar fixed dense>
+      <TopAppBar fixed dense className="docs-app-bar">
         <TopAppBarRow>
           <TopAppBarSection>
             <TopAppBarIcon navIcon>

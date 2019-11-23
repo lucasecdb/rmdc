@@ -1,7 +1,13 @@
-$mdc-theme-primary: black;
-$mdc-theme-secondary: hsl(240, 50%, 50%);
+$mdc-theme-primary: #6200ee;
+$mdc-theme-secondary: #009688;
+
+$top-app-bar-color: black;
 
 @import '@lucasecdb/rmdc/rmdc.scss';
+
+.docs-app-bar {
+  @include mdc-top-app-bar-fill-color-accessible($top-app-bar-color);
+}
 
 * {
   margin: 0;
