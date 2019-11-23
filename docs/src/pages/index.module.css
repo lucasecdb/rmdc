@@ -1,0 +1,22 @@
+.componentGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-gap: 1rem;
+}
+
+.componentCard :global(.mdc-card__primary-action) {
+  height: 100%;
+}
+
+.componentImage {
+  margin: 15px auto;
+}
+
+.componentContent {
+  padding: 1rem;
+  padding-top: 0;
+}
+
+.componentDescription {
+  margin-top: .5rem;
+}

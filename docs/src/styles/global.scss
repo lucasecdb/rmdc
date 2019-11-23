@@ -1,3 +1,14 @@
+$mdc-theme-primary: #6200ee;
+$mdc-theme-secondary: #009688;
+
+$top-app-bar-color: black;
+
+@import '@lucasecdb/rmdc/rmdc.scss';
+
+.docs-app-bar {
+  @include mdc-top-app-bar-fill-color-accessible($top-app-bar-color);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -14,7 +25,7 @@ html, body {
   max-width: 900px;
   margin-left: auto;
   margin-right: auto;
-  padding: 40px 15px;
+  padding: 15px;
 }
 
 hr {
@@ -31,4 +42,23 @@ hr {
 
 .container > .mdc-typography--caption:not(:first-of-type) {
   margin-top: 1rem;
+}
+
+.mdx-container {
+  p, h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 1.45rem;
+  }
+
+  ul {
+    margin-left: 1.25rem;
+    margin-bottom: 1.45rem;
+  }
+
+  ul > li {
+    margin: .5rem 0 0 1rem;
+  }
+
+  p {
+    color: rgba(0, 0, 0, .87);
+  }
 }

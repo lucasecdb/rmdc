@@ -7,8 +7,7 @@
 
 This library is a [React](https://reactjs.org) adapter for the [Material Design Components for Web](https://github.com/material-components/material-components-web) package.
 We aim to support all components currently implemented in MDC Web, but we are not there yet. Bellow you can find a table
-that describes which components we have implemented yet, and we are working on adding documentation soon. For now, you can
-see the components in action in our example app.
+that describes which components we have implemented yet, and checkout our documentation in the app inside the docs folder.
 
 ## Motivation
 

@@ -8,6 +8,7 @@ import classNames from 'classnames'
 import React, { useEffect, useRef, useState } from 'react'
 
 import useClassList from './hooks/useClassList'
+import { IconButton, IconButtonProps } from './IconButton'
 
 const BASE = 'mdc-top-app-bar'
 const SECTION = `${BASE}__section`
@@ -29,7 +30,6 @@ const CSS_CLASSES = {
 }
 
 export interface TopAppbarFixedAdjustProps {
-  tag?: string
   className?: string
   dense?: boolean
   prominent?: boolean
@@ -37,7 +37,6 @@ export interface TopAppbarFixedAdjustProps {
 }
 
 export const TopAppBarFixedAdjust: React.FunctionComponent<TopAppbarFixedAdjustProps> = ({
-  tag: Tag = 'main',
   children,
   className = '',
   dense = false,
@@ -56,78 +55,68 @@ export const TopAppBarFixedAdjust: React.FunctionComponent<TopAppbarFixedAdjustP
   })
 
   return (
-    // https://github.com/DefinitelyTyped/DefinitelyTyped/issues/26635
-    // @ts-ignore
-    <Tag className={classes} {...otherProps}>
+    <main className={classes} {...otherProps}>
       {children}
-    </Tag>
+    </main>
   )
 }
 
-export interface TopAppBarIconProps<T> extends React.HTMLProps<T> {
+export interface TopAppBarIconProps {
   actionItem?: boolean
   className?: string
   children: React.ReactElement<any>
   navIcon?: boolean
 }
 
-export const TopAppBarIcon: <T extends Element = HTMLElement>(
-  props: TopAppBarIconProps<T>
-) => React.ReactElement<HTMLElement> = ({
+export const TopAppBarIcon: React.FC<TopAppBarIconProps & IconButtonProps> = ({
   actionItem = false,
   navIcon = false,
   className,
   children,
   ...otherProps
 }) => {
-  return React.cloneElement(children, {
-    ...otherProps,
-    className: classNames(className, children.props.className, {
-      [CSS_CLASSES.ACTION_ITEM]: actionItem,
-      [CSS_CLASSES.NAV_ICON]: navIcon,
-    }),
-  })
-}
-
-export interface TopAppBarRowProps<T> extends React.HTMLProps<T> {
-  className?: string
-  tag?: string
-}
-
-export const TopAppBarRow: <T extends HTMLElement = HTMLDivElement>(
-  props: TopAppBarRowProps<T>
-) => React.ReactElement<T> = ({
-  children,
-  className,
-  tag: Tag = 'div',
-  ...otherProps
-}) => {
   return (
-    // @ts-ignore  https://github.com/Microsoft/TypeScript/issues/28892
-    <Tag className={classNames(className, CSS_CLASSES.ROW)} {...otherProps}>
+    <IconButton
+      {...otherProps}
+      className={classNames(className, {
+        [CSS_CLASSES.ACTION_ITEM]: actionItem,
+        [CSS_CLASSES.NAV_ICON]: navIcon,
+      })}
+    >
       {children}
-    </Tag>
+    </IconButton>
   )
 }
 
-export interface TopAppBarSectionProps<T> extends React.HTMLProps<T> {
-  align?: 'start' | 'end'
+export interface TopAppBarRowProps extends React.HTMLProps<HTMLDivElement> {
   className?: string
-  tag?: string
 }
 
-export const TopAppBarSection: <T extends HTMLElement = HTMLElement>(
-  props: TopAppBarSectionProps<T>
-) => React.ReactElement<T> = ({
-  align,
-  className,
+export const TopAppBarRow: React.FC<TopAppBarRowProps> = ({
   children,
-  tag: Tag = 'section',
+  className,
   ...otherProps
 }) => {
   return (
-    // @ts-ignore  https://github.com/Microsoft/TypeScript/issues/28892
-    <Tag
+    <div className={classNames(className, CSS_CLASSES.ROW)} {...otherProps}>
+      {children}
+    </div>
+  )
+}
+
+export interface TopAppBarSectionProps extends React.HTMLProps<HTMLElement> {
+  align?: 'start' | 'end'
+  className?: string
+}
+
+export const TopAppBarSection: React.FC<TopAppBarSectionProps> = ({
+  align,
+  className,
+  children,
+  ...otherProps
+}) => {
+  return (
+    <section
       className={classNames(className, CSS_CLASSES.SECTION, {
         [CSS_CLASSES.SECTION_START]: align === 'start',
         [CSS_CLASSES.SECTION_END]: align === 'end',
@@ -135,28 +124,23 @@ export const TopAppBarSection: <T extends HTMLElement = HTMLElement>(
       {...otherProps}
     >
       {children}
-    </Tag>
+    </section>
   )
 }
 
-export interface TopAppBarTitleProps<T> extends React.HTMLProps<T> {
+export interface TopAppBarTitleProps extends React.HTMLProps<HTMLSpanElement> {
   className?: string
-  tag?: string
 }
 
-export const TopAppBarTitle: <T extends HTMLElement = HTMLSpanElement>(
-  props: TopAppBarTitleProps<T>
-) => React.ReactElement<T> = ({
+export const TopAppBarTitle: React.FC<TopAppBarTitleProps> = ({
   children,
   className,
-  tag: Tag = 'span',
   ...otherProps
 }) => {
   return (
-    // @ts-ignore  https://github.com/Microsoft/TypeScript/issues/28892
-    <Tag className={classNames(className, CSS_CLASSES.TITLE)} {...otherProps}>
+    <span className={classNames(className, CSS_CLASSES.TITLE)} {...otherProps}>
       {children}
-    </Tag>
+    </span>
   )
 }
 
