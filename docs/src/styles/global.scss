@@ -1,3 +1,8 @@
+$mdc-theme-primary: black;
+$mdc-theme-secondary: hsl(240, 50%, 50%);
+
+@import '@lucasecdb/rmdc/rmdc.scss';
+
 * {
   margin: 0;
   padding: 0;

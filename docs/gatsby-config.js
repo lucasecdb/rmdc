@@ -1,4 +1,7 @@
 /* eslint-env node */
+/* eslint-disable @typescript-eslint/no-var-requires */
+
+const path = require('path')
 
 module.exports = {
   siteMetadata: {
@@ -17,7 +20,12 @@ module.exports = {
     'gatsby-plugin-mdx',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
-    'gatsby-plugin-sass',
+    {
+      resolve: 'gatsby-plugin-sass',
+      options: {
+        includePaths: [path.resolve(__dirname, './node_modules')],
+      },
+    },
     {
       resolve: 'gatsby-plugin-google-fonts',
       options: {
