@@ -9,12 +9,14 @@ import {
 } from '@lucasecdb/rmdc'
 import { Link } from 'gatsby'
 import * as React from 'react'
+import { Helmet } from 'react-helmet'
 
 import styles from './Layout.module.css'
 
 const Layout: React.FC = ({ children }) => {
   return (
     <>
+      <Helmet titleTemplate="%s | RMDC" defaultTitle="RMDC" />
       <TopAppBar fixed dense className="docs-app-bar">
         <TopAppBarRow>
           <TopAppBarSection>
