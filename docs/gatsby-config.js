@@ -32,5 +32,6 @@ module.exports = {
         fonts: ['Material+Icons'],
       },
     },
+    'gatsby-plugin-react-helmet',
   ],
 }
