@@ -31,7 +31,7 @@ const Layout: React.FC = ({ children }) => {
           </TopAppBarSection>
         </TopAppBarRow>
       </TopAppBar>
-      <TopAppBarFixedAdjust dense fixed>
+      <TopAppBarFixedAdjust dense>
         <div className="container">{children}</div>
       </TopAppBarFixedAdjust>
     </>
