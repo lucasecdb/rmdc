@@ -7,8 +7,6 @@ import Layout from '../components/Layout'
 
 import styles from './index.module.css'
 
-const COMPONENT_PAGE_REGEX = /\scomponent$/i
-
 const App = ({ data: { components } }) => {
   return (
     <Layout>
@@ -26,9 +24,7 @@ const App = ({ data: { components } }) => {
                 {...node.frontmatter.image.childImageSharp}
               />
               <div className={styles.componentContent}>
-                <t.Body1>
-                  {node.frontmatter.title.replace(COMPONENT_PAGE_REGEX, '')}
-                </t.Body1>
+                <t.Body1>{node.frontmatter.title}</t.Body1>
                 <t.Body2 className={styles.componentDescription}>
                   {node.frontmatter.description}
                 </t.Body2>
@@ -44,7 +40,7 @@ const App = ({ data: { components } }) => {
 export const pageQuery = graphql`
   query {
     components: allMdx(
-      filter: { frontmatter: { title: { regex: "/\\scomponent$/i" } } }
+      filter: { frontmatter: { component: { eq: true } } }
       sort: { order: ASC, fields: frontmatter___title }
     ) {
       edges {
