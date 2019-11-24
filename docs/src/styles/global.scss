@@ -49,12 +49,12 @@ hr {
     margin-bottom: 1.45rem;
   }
 
-  ul {
+  ul:not(.mdc-list) {
     margin-left: 1.25rem;
     margin-bottom: 1.45rem;
   }
 
-  ul > li {
+  ul:not(.mdc-list) > li {
     margin: .5rem 0 0 1rem;
   }
 
