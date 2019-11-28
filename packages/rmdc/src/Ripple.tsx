@@ -33,7 +33,9 @@ const useEventListener = (
       return
     }
 
-    const eventListener: EventListener = event => handlerRef.current(event)
+    const eventListener: EventListener = event => {
+      handlerRef.current(event)
+    }
 
     element.addEventListener(eventName, eventListener)
 
@@ -200,6 +202,26 @@ export function useRipple<T extends HTMLElement, U extends HTMLElement = T>({
 
   const eventTargetRef = activatorRef || surfaceRef
 
+  const touchedRef = useRef<boolean>(false)
+
+  const handleTouchStart = useCallback(
+    (evt: Event) => {
+      touchedRef.current = true
+      activateRipple(evt)
+    },
+    [activateRipple]
+  )
+
+  const handleMouseDown = useCallback(
+    (evt: Event) => {
+      if (touchedRef.current) {
+        return
+      }
+      activateRipple(evt)
+    },
+    [activateRipple]
+  )
+
   const handleFocus = useCallback(() => {
     foundationRef.current?.handleFocus()
   }, [foundationRef])
@@ -211,10 +233,10 @@ export function useRipple<T extends HTMLElement, U extends HTMLElement = T>({
   useEventListener('focus', handleFocus, eventTargetRef.current)
   useEventListener('blur', handleBlur, eventTargetRef.current)
 
-  useEventListener('mousedown', activateRipple, eventTargetRef.current)
+  useEventListener('mousedown', handleMouseDown, eventTargetRef.current)
   useEventListener('mouseup', deactivateRipple, eventTargetRef.current)
 
-  useEventListener('touchstart', activateRipple, eventTargetRef.current)
+  useEventListener('touchstart', handleTouchStart, eventTargetRef.current)
   useEventListener('touchend', deactivateRipple, eventTargetRef.current)
 
   useEventListener('keydown', activateRipple, eventTargetRef.current)
